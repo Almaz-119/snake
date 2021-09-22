@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Field {
+    Scanner sc = new Scanner(System.in);
         int[][] arr = {
                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                 {1,2,2,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -50,7 +52,7 @@ public class Field {
             // we add every time 1 more step here:
             snakeX.set(length - 1, snakeX.get(length - 1) + 1);
             // if we reach the limit which is 9 we only make it 0:
-            if (snakeX.get(length - 1) == 10) {
+            if (snakeX.get(length - 1) == 40) {
                 snakeX.set(length - 1, 0);
             }
             // updating tails of snake:
@@ -71,7 +73,7 @@ public class Field {
             // we add every time 1 more step here:
             snakeY.set(length - 1, snakeY.get(length - 1) + 1);
             // if we reach the limit which is 6 we only make it 0:
-            if (snakeY.get(length - 1) == 6) {
+            if (snakeY.get(length - 1) == 20) {
                 snakeY.set(length - 1, 0);
             }
             // updating tails of snake:
@@ -93,7 +95,7 @@ public class Field {
             snakeX.set(length - 1, snakeX.get(length - 1) - 1);
             // if we reach the limit which is 0 we only make it 9:
             if (snakeX.get(length - 1) == -1) {
-                snakeX.set(length - 1, 9);
+                snakeX.set(length - 1, 39);
             }
             // updating tails of snake:
             tailY = snakeY.get(0);
@@ -115,7 +117,7 @@ public class Field {
             snakeY.set(length - 1, snakeY.get(length - 1) - 1);
             // if we reach the limit which is 0 we only make it 5:
             if (snakeY.get(length - 1) == -1) {
-                snakeY.set(length - 1, 5);
+                snakeY.set(length - 1, 19);
             }
             // updating tails of snake:
             tailY = snakeY.get(0);
