@@ -10,10 +10,11 @@ public class Main extends JFrame {
     public Main() {
         panel.setBackground(Color.black);
         panel.setVisible(true);
-        add(panel);                                       //adds panel to JFrame!!!
+        add(panel);                                          //adds panel to JFrame!!!
+        addKeyListener(new DrawPanelKeyListener());
     }
     public static void main(String[] args) {
-        Main app = new Main();                             // here codes are creating my JFrame components, characteristics.
+        Main app = new Main();                               // here codes are creating my JFrame components, characteristics.
         app.setSize(900,700);
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setVisible(true);
@@ -55,6 +56,16 @@ public class Main extends JFrame {
             switch (KeyCode) {
                 case KeyEvent.VK_UP:
                     field.moveUp();
+                case KeyEvent.VK_DOWN:
+                    field.moveDown();
+                    break;
+                case KeyEvent.VK_LEFT:
+                    field.moveLeft();
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    field.moveRight();
+                    break;
+                default:
                     break;
             }
             repaint();
