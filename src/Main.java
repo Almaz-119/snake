@@ -47,15 +47,25 @@ public class Main extends JFrame {
                     }
                 }
             }
+            if (field.dir == 0) {
+                field.moveUp();
+            }if (field.dir == 1) {
+                field.moveRight();
+            }if (field.dir == 2) {
+                field.moveDown();
+            }if (field.dir == 3) {
+                field.moveLeft();
+            }
+            repaint();
         }
     }
-    class DrawPanelKeyListener extends KeyAdapter {
-        @Override
+    class DrawPanelKeyListener extends KeyAdapter{
         public void keyPressed(KeyEvent e) {
             int KeyCode = e.getKeyCode();
             switch (KeyCode) {
                 case KeyEvent.VK_UP:
                     field.moveUp();
+                    break;
                 case KeyEvent.VK_DOWN:
                     field.moveDown();
                     break;
@@ -68,7 +78,6 @@ public class Main extends JFrame {
                 default:
                     break;
             }
-            repaint();
         }
     }
 }

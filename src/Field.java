@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Field {
-    Scanner sc = new Scanner(System.in);
         int[][] arr = {
                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                 {1,2,2,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -39,7 +37,6 @@ public class Field {
         int tailY = 1;
         int length = 3;
         int dir = -1;
-
     public void moveRight() {
         if (dir != 3) {
             dir = 1;
@@ -59,6 +56,7 @@ public class Field {
             tailY = snakeY.get(0);
             tailX = snakeX.get(0);
             places(arr, snakeX, snakeY);
+            pause();
         }
     }
     public void moveDown() {
@@ -80,6 +78,7 @@ public class Field {
             tailY = snakeY.get(0);
             tailX = snakeX.get(0);
             places(arr, snakeX, snakeY);
+            pause();
         }
     }
     public void moveLeft() {
@@ -100,8 +99,8 @@ public class Field {
             // updating tails of snake:
             tailY = snakeY.get(0);
             tailX = snakeX.get(0);
-
             places(arr, snakeX, snakeY);
+            pause();
         }
     }
     public void moveUp() {
@@ -123,6 +122,7 @@ public class Field {
             tailY = snakeY.get(0);
             tailX = snakeX.get(0);
             places(arr, snakeX, snakeY);
+            pause();
         }
     }
     public static void places(int[][] arr, List<Integer> x, List<Integer> y) {
@@ -156,5 +156,12 @@ public class Field {
             }
         }
         return false;
+    }
+    private void pause() {
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
