@@ -8,24 +8,58 @@ public class Main extends JFrame {
     DrawPanel panel = new DrawPanel();
     int n = 1;
     public Main() {
+        JButton b = new JButton("Start / Restart");
         panel.setBackground(Color.black);
         panel.setVisible(true);
-        add(panel);                                             //adds panel to JFrame!!!
+        panel.setLayout(null);
+        b.setBounds(50, 30, 150, 50);
+        b.setFocusable(false);
+        b.setVisible(true);
+        panel.add(b);
+        b.addActionListener(e -> {
+            field.start = 0;
+            field.start();
+            n = 1;
+            repaint();
+        });
         addKeyListener(new DrawPanelKeyListener());             //also, we should add DrawPanelKeylistener() class.
+        add(panel);                                             //adds panel to JFrame!!!
+    }
+    public void run() {
+        if (field.start == 0) {
+            switch (n) {
+                case 0:
+                    field.moveUp();
+                    break;
+                case 1:
+                    field.moveRight();
+                    break;
+                case 2:
+                    field.moveDown();
+                    break;
+                case 3:
+                    field.moveLeft();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
     public static void main(String[] args) {
         Main app = new Main();                                  // here codes are creating my JFrame components, characteristics.
         app.setSize(900,700);
+        app.setLocationRelativeTo(null);
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setVisible(true);
     }
     class DrawPanel extends JPanel{
+        @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.setColor(Color.blue);
             g.setFont(g.getFont().deriveFont(50f));
-            String sc = Integer.toString(field.score);
-            g.drawString(sc, 900, 50);
+            String sc = Integer.toString(Field.score - 1);
+            g.drawString("Score: " + sc, 900, 50);
             g.drawString("Snake 1.1", 600, 50);
             for (int j = 0; j < 40; j++) {
                 for (int i = 0; i < 20; i++) {
@@ -49,27 +83,15 @@ public class Main extends JFrame {
                     }
                 }
             }
-            switch (n) {
-                case 0:
-                    field.moveUp();
-                    break;
-                case 1:
-                    field.moveRight();
-                    break;
-                case 2:
-                    field.moveDown();
-                    break;
-                case 3:
-                    field.moveLeft();
-                    break;
-                default:
-                    break;
-            }
+            run();
             repaint();
         }
     }
     class DrawPanelKeyListener extends KeyAdapter{
         public void keyPressed(KeyEvent e) {
+            if (field.start == 1) {
+                JOptionPane.showMessageDialog(Main.this, "Lost Press Start button to start again!");
+            }
             int KeyCode = e.getKeyCode();
             switch (KeyCode) {
                 case KeyEvent.VK_UP:

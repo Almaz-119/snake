@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Field {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},};
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
     List<Integer> snakeX = new ArrayList<>();
     List<Integer> snakeY = new ArrayList<>();
 
@@ -39,8 +40,8 @@ public class Field {
     int tailY = 1;
     int length = 3;
     int dir = 1;
+    int start = 0;
     static boolean found;
-
     public void moveRight() {
         if (dir != 3) {
             dir = 1;
@@ -66,10 +67,10 @@ public class Field {
             tailY = snakeY.get(0);
             tailX = snakeX.get(0);
             places(arr, snakeX, snakeY);
+            isEnd();
             pause();
         }
     }
-
     public void moveDown() {
         if (dir != 0) {
             dir = 2;
@@ -95,10 +96,10 @@ public class Field {
             tailY = snakeY.get(0);
             tailX = snakeX.get(0);
             places(arr, snakeX, snakeY);
+            isEnd();
             pause();
         }
     }
-
     public void moveLeft() {
         if (dir != 1) {
             dir = 3;
@@ -124,10 +125,10 @@ public class Field {
             tailY = snakeY.get(0);
             tailX = snakeX.get(0);
             places(arr, snakeX, snakeY);
+            isEnd();
             pause();
         }
     }
-
     public void moveUp() {
         if (dir != 2) {
             dir = 0;
@@ -153,6 +154,7 @@ public class Field {
             tailY = snakeY.get(0);
             tailX = snakeX.get(0);
             places(arr, snakeX, snakeY);
+            isEnd();
             pause();
         }
     }
@@ -192,9 +194,39 @@ public class Field {
     }
     public void pause() {
         try {
-            Thread.sleep((20 + score));
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    public void isEnd() {
+        for (int i = 0; i < length - 1; i++) {
+            if (snakeX.get(length - 1) == snakeX.get(i) && snakeY.get(length - 1) == snakeY.get(i)) {
+                start = 1;
+            }
+        }
+    }
+    public void start() {
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 40; j++) {
+                arr[i][j] = 1;
+            }
+        }
+        arr[1][1] = 2;
+        arr[1][2] = 2;
+        arr[1][3] = 3;
+        tailX = 1;
+        tailY = 1;
+        length = 3;
+        dir = 1;
+        snakeX.clear();
+        snakeY.clear();
+        snakeX.add(1);
+        snakeY.add(1);
+        snakeX.add(2);                                        //x=[1,2,3] ; y=[1,1,1]
+        snakeY.add(1);
+        snakeX.add(3);
+        snakeY.add(1);
+        score = 0;
     }
 }
